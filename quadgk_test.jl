@@ -24,6 +24,8 @@ function l(x)
     return num/den
 end
 
+#=========================================================#
+
 # should be \sim 0.7726517126900
 I, dI = quadgk(h, 0, pi)
 println("Integral value is ", I, " +- ", dI)
