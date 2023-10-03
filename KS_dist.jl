@@ -131,6 +131,7 @@ Function for compute p-value from survival function.
 If the KS value is too large and goes outside the bounds of the constructed
 distribution, the p-value cannot be calculated and the smallest non-zero
 value is returned, which should therefore be understood as an overestimate.
+The returned variable vf tells us which case we are in.
 
 Parameters
 ----------
@@ -150,7 +151,9 @@ Return
 pv : float
     p-value \
 KS : float
-    Value of KS for data sample
+    Value of KS for data sample \
+vf : Int
+    1 if everything is ok, 0 if KS is out of range
 """
 function sf(data::Vector, f::Function, start::Float64; args::Tuple=(), N::Int=Int(1e4))
     
@@ -167,12 +170,15 @@ function sf(data::Vector, f::Function, start::Float64; args::Tuple=(), N::Int=In
             j = i
         end 
     end
+    vf = 0
     if j == 0
         pv = sv[N-1]
+        vf = 0
     else
         pv = sv[j] 
+        vf = 1
     end
-    return KS, pv
+    return KS, pv, vf
 end
 
 

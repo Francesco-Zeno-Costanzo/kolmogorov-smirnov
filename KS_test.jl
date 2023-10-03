@@ -35,10 +35,10 @@ y2 = sqrt.(2 .* z .* s1^2) .*sin.(phi) .+ m1
 Test distribution: P value of set of measurament
 ==============================================================#
 
-KS1, p_value1 = sf(y1, gauss, -15.; args=(m0, s0), N=Int(1e4))
-println(KS1, " ", p_value1) # accept H_0
-KS2, p_value2 = sf(y2, gauss, -15.; args=(m0, s0), N=Int(1e4))
-println(KS2, " ", p_value2) # reject H_0
+KS1, p_value1, vf = sf(y1, gauss, -15.; args=(m0, s0), N=Int(1e4))
+println(KS1, " ", p_value1, " ", vf) # accept H_0
+KS2, p_value2, vf = sf(y2, gauss, -15.; args=(m0, s0), N=Int(1e4))
+println(KS2, " ", p_value2, " ", vf) # reject H_0
 
 t = -5:0.01:8
 fig1 = figure(1)
